@@ -1,20 +1,23 @@
 # COL216 LAB 3 
 # CACHE SIMULATOR
 
-## Departmemt of Computer Science and Engineering
-## IIT Delhi
+## Departmemt of Computer Science and Engineering, IIT Delhi
 
 ### Parth Verma - 2022CS11936
 
 
-**Each strategy generates CSV files containing daily cash flow, order statistics, and a final P&L report.**
+**THe Cache Simulator was tested on multiple trace files, and was instantiated with differnt configuration , Results and observations from these tests are shared below**
 
-**Below is the discription of all trading startegeies , It contains details about its implementation, insights and results.**
-
-# Trading Strategy: BASIC
+# Assosiativity  :-
 
 ### Description
-The BASIC trading strategy is a simple algorithmic trading approach implemented in C++. It aims to capitalize on short-term price movements by buying when the price increases consistently over a specified period and selling when the price decreases consistently.
+Keeping the poilicies fixed (write_no_allocate, write back , LRU) the Cache was tested for 3 different combinations of cache size and set size. 
+The test was meant to compare performance of caches with differnet assosiativities (Fully assosiative, Set assosiative , DIrect Mapped)
+
+![Basic](./PLots/ASSOSIATIVITY/trace1/hit.png)a
+![Basic](./PLots/ASSOSIATIVITY/trace1/miss.png)
+![Basic](./PLots/ASSOSIATIVITY/trace1/total_cycles.png)
+![Basic](./PLots/ASSOSIATIVITY/trace1/cache.png)
 
 ### Parameters
 - **Symbol**: The symbol or ticker of the financial instrument being traded.
