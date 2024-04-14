@@ -6,7 +6,7 @@
 ### Parth Verma - 2022CS11936
 
 
-**THe Cache Simulator was tested on multiple trace files, and was instantiated with differnt configuration , Results and observations from these tests are shared below**
+**The Cache Simulator was tested on multiple trace files, and was instantiated with differnt configuration , Results and observations from these tests are shared below**
 
 # Assosiativity  :-
 
@@ -14,341 +14,126 @@
 Keeping the poilicies fixed (write_no_allocate, write back , LRU) the Cache was tested for 3 different combinations of cache size and set size. 
 The test was meant to compare performance of caches with differnet assosiativities (Fully assosiative, Set assosiative , DIrect Mapped)
 
-![Basic](./PLots/ASSOSIATIVITY/trace1/hit.png)a
+![Basic](./PLots/ASSOSIATIVITY/trace1/hit.png)
 ![Basic](./PLots/ASSOSIATIVITY/trace1/miss.png)
 ![Basic](./PLots/ASSOSIATIVITY/trace1/total_cycles.png)
 ![Basic](./PLots/ASSOSIATIVITY/trace1/cache.png)
 
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **n**: The number of days used to determine price trends.
-- **x**: The maximum number of shares to hold.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
+### Observations
+- **Hit_Rate**: The Hit Rate increases as the assosiativity increases. 
+- **Miss_Penalty**: The Miss Penalty decreases as the asociativity increses.
+- **Total Cycles**: The Total_Cycles decreases as the asociativity increses.
+- **Cache_Size**: THe Cache Size decreases as assosiativty increases.
 
-### Implementation
-1. **Data Retrieval**: The strategy utilizes Python scripts (`Data.py`) to retrieve historical price data for the specified symbol and time frame.
-2. **Data Parsing**: The retrieved data is parsed using C++ functions (`parse_data.cpp`) to extract relevant information such as dates and closing prices.
-3. **Trading Logic**:
-   - The algorithm analyzes price trends over the specified period (`n` days).
-   - It buys shares if the price consistently increases over `n` days and the current holding is below the maximum limit (`x`).
-   - It sells shares if the price consistently decreases over `n` days and the current holding is above the negative maximum limit (`-x`).
-4. **Output Generation**:
-   - Daily cash flow and order statistics are recorded and stored in CSV files (`daily_cashflow.csv`, `order_statistics.csv`).
-   - The final profit and loss (P&L) statement is written to `final_pnl.txt`.
+From above we can conclude ,Fully assosiative cache performs much better than set assosiative and direct mapped cache.
+But, Fully Assosiative Cache demands high amount of hardware therefore is not practically realizable for large caches.
+Hence we conclude that Set assosiative is the best possible configuration among the above shown.
 
-### Results and Insights
-
-#### Performance Evaluation
-The performance of the BASIC trading strategy can be evaluated by analyzing the generated Profit and Loss (P&L) statement (`final_pnl.txt`). This statement provides insights into the profitability of the strategy over the specified trading period.
-
-#### Visual Analysis
-Graphical representations of daily cash flow and order statistics offer valuable insights into the execution and profitability of the BASIC trading strategy. These visualizations can help identify trends, patterns, and potential areas for optimization in the trading strategy.
-
-![Basic](./pictures/BASIC.png)
-
-
-# Trading Strategy: ADX
+# LRU v/s FIFO
 
 ### Description
-The ADX (Average Directional Index) trading strategy is an algorithmic approach implemented in C++. It aims to identify the strength of a trend in a financial instrument's price movement and make trading decisions based on the calculated ADX value.
-
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **n**: The number of days used in the calculation of the ADX and related indicators.
-- **x**: The maximum number of shares to hold.
-- **ADX Threshold**: The threshold value used to trigger buying or selling signals based on the ADX.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
-
-### Implementation
-1. **Data Retrieval**: Historical price data for the specified symbol and time frame is obtained using Python scripts (`Data.py`).
-2. **Data Parsing**: The retrieved data is parsed using C++ functions (`parse_data.cpp`) to extract relevant information such as dates, closing prices, highs, and lows.
-3. **Indicator Calculation**:
-   - True Range (TR) and Directional Movement (DM) are calculated to determine price volatility and directional movement, respectively.
-   - Average True Range (ATR) is computed to smooth out TR over `n` days.
-   - Positive Directional Index (DI+) and Negative Directional Index (DI-) are calculated based on DM and ATR.
-   - The ADX value is computed using DI+ and DI- to measure the strength of the prevailing trend.
-4. **Trading Logic**:
-   - The algorithm evaluates the ADX value against the specified threshold.
-   - It buys shares if the ADX exceeds the threshold and the current holding is below the maximum limit (`x`).
-   - It sells shares if the ADX falls below the threshold and the current holding is above the negative maximum limit (`-x`).
-5. **Output Generation**:
-   - Daily cash flow and order statistics are recorded and stored in CSV files (`daily_cashflow.csv`, `order_statistics.csv`).
-   - The final profit and loss (P&L) statement is written to `final_pnl.txt`.
-
-### Results and Insights
-- **Performance Evaluation**: Analyze the generated P&L statement (`final_pnl.txt`) to assess the strategy's profitability and overall performance.
-- **Visual Analysis**: Graphical representations of daily cash flow and order statistics can provide visual insights into the strategy's execution and profitability.
+Keeping the other parameters fixed the Cahces was instantiated with LRU and then FIFO, Parameters like Hit Rate, Miss Penalty, Total Cycles were observed.
 
 
-![ADX](./pictures/ADX.png)
+![Basic](./PLots/LRU_FIFO/hit.png)
+![Basic](./PLots/LRU_FIFO/miss.png)
+![Basic](./PLots/LRU_FIFO/total_cycles.png)
 
 
-# Trading Strategy: DMA
+### Observations
+- **Hit_Rate**: The Hit Rate is almost equal for LRU and FIFO replacement policies. 
+- **Miss_Penalty**: The Miss Penalty is generally higher for FIFO than LRU.
+- **Total Cycles**: FIFO takes high no of cycles as compared to LRU
+
+
+From above we can conclude ,LRU cache performs much better than FIFO cache.
+
+
+# WRITE_THROUGH v/s WRITE_BACK
 
 ### Description
-The DMA (Daily Moving Average) trading strategy is an algorithmic approach implemented in C++. It aims to capitalize on short-term price movements by identifying deviations from the moving average.
-
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **n**: The number of days used to calculate the moving average.
-- **x**: The maximum number of shares to hold.
-- **p**: The threshold multiplier used to trigger buying or selling signals based on deviations from the moving average.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
-
-### Implementation
-1. **Data Retrieval**: Historical price data for the specified symbol and time frame is obtained using Python scripts (`Data.py`).
-2. **Data Parsing**: The retrieved data is parsed using C++ functions (`parse_data.cpp`) to extract relevant information such as dates and closing prices.
-3. **Moving Average Calculation**:
-   - The DMA is calculated by averaging the closing prices over the specified `n` days.
-4. **Standard Deviation Calculation**:
-   - The standard deviation (SD) is computed to measure the volatility of the closing prices around the DMA.
-5. **Trading Logic**:
-   - The algorithm compares the current closing price with the DMA and triggers buying or selling signals based on deviations exceeding a threshold (`p * SD`).
-   - It buys shares if the current closing price is above the DMA by more than `p * SD` and the current holding is below the maximum limit (`x`).
-   - It sells shares if the current closing price is below the DMA by more than `p * SD` and the current holding is above the negative maximum limit (`-x`).
-6. **Output Generation**:
-   - Daily cash flow and order statistics are recorded and stored in CSV files (`daily_cashflow.csv`, `order_statistics.csv`).
-   - The final profit and loss (P&L) statement is written to `final_pnl.txt`.
-
-### Results and Insights
-- **Performance Evaluation**: Analyze the generated P&L statement (`final_pnl.txt`) to assess the strategy's profitability and overall performance.
-- **Visual Analysis**: Graphical representations of daily cash flow and order statistics can provide visual insights into the strategy's execution and profitability.
+Keeping the other parameters fixed the Cahces was instantiated with write_through and then write_back, Parameters like Hit Rate, Miss Penalty, Total Cycles were observed.
 
 
-![ADX](./pictures/DMA.png)
+![Basic](./PLots/WB_WT/hir.png)
+![Basic](./PLots/WB_WT/miss.png)
+![Basic](./PLots/WB_WT/total_cycles.png)
 
 
-# Trading Strategy: DMA++
+### Observations
+- **Hit_Rate**: The Hit Rate is almost equal for Write_Through and Write_Back modes. 
+- **Miss_Penalty**: The Miss Penalty is generally higher for Write_Through than Write_Back.
+- **Total Cycles**: Write_through takes high no of cycles as compared to Write_Back.
+
+
+From above we can conclude ,Write_Back cache performs much better than Write_through cache.
+
+
+# WRITE_ALLOCATE v/s WRITE_NO_ALLOCATE
 
 ### Description
-The DMA++ (Dynamic Moving Average Plus Plus) trading strategy is an advanced algorithmic approach implemented in C++. It aims to capture trends in a financial instrument's price movement by dynamically adjusting a moving average based on price volatility.
-
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **n**: The number of days used to calculate the dynamic moving average.
-- **x**: The maximum number of shares to hold.
-- **p**: The percentage threshold for buying or selling based on deviation from the moving average.
-- **max_hold_days**: The maximum number of days to hold a position before selling.
-- **c1** and **c2**: Parameters for adjusting the dynamic moving average based on price volatility.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
-
-### Implementation
-1. **Data Retrieval**: Historical price data for the specified symbol and time frame is obtained using Python scripts (`Data.py`).
-2. **Data Parsing**: The retrieved data is parsed using C++ functions (`parse_data.cpp`) to extract relevant information such as dates and closing prices.
-3. **Price Volatility Analysis**:
-   - Price changes and absolute price changes are computed to calculate the Efficiency Ratio (ER).
-   - ER is used to adjust the smoothing factor (SF) dynamically, considering market volatility.
-4. **Dynamic Moving Average Calculation**:
-   - The dynamic moving average (DMA) is calculated using the adjusted SF.
-   - DMA adjusts to changes in price volatility, providing a more responsive indicator of trends.
-5. **Trading Logic**:
-   - Buy signals are generated when the current price deviates positively from the DMA by a specified percentage (`p`) and the holding is below the maximum limit (`x`).
-   - Sell signals are generated when the current price deviates negatively from the DMA by a specified percentage (`p`) and the holding is above the negative maximum limit (`-x`).
-   - Positions are held for a maximum number of days (`max_hold_days`) before selling.
-6. **Output Generation**:
-   - Daily cash flow and order statistics are recorded and stored in CSV files (`daily_cashflow.csv`, `order_statictics.csv`).
-
-### Results and Insights
-- **Performance Evaluation**: The strategy's profitability and execution efficiency can be evaluated through the generated P&L statement and order statistics.
-- **Volatility Adjustment**: DMA++ dynamically adjusts its moving average based on price volatility, potentially leading to improved trend detection.
-- **Parameter Sensitivity Analysis**: Sensitivity analysis can be conducted to understand how adjusting parameters (`c1`, `c2`, `p`, `max_hold_days`) affects strategy performance.
-- **Comparison with Static Moving Averages**: Comparing DMA++ with traditional moving average strategies under various market conditions can provide insights into its effectiveness.
-- **Risk Management**: Effective risk management techniques, such as position sizing and stop-loss orders, are essential for managing downside risk and enhancing overall strategy performance.
+Keeping the other parameters fixed the Cahces was instantiated with write_allocate and then write_no_allocate, Parameters like Hit Rate, Miss Penalty, Total Cycles were observed.
 
 
-![ADX](./pictures/DMA++.png)
+![Basic](./PLots/WA_WNA/hitr.png)
+![Basic](./PLots/WA_WNA/miss.png)
+![Basic](./PLots/WA_WNA/total_cycles.png)
 
 
+### Observations
+- **Hit_Rate**: The Hit Rate is greater for Write_Allocate and Write_no_allocate modes. 
+- **Miss_Penalty**: The Miss Penalty is generally higher for Write_Allocate than Write_no_allocate.
+- **Total Cycles**: Write_Allocate takes less no of cycles as compared to Write_no_allocate.
 
-# Trading Strategy: MACD
+
+From above we can conclude ,Write_Allocate cache performs much better than Write_no_allocate.
+
+
+# BLOCK SIZE
 
 ### Description
-The MACD (Moving Average Convergence Divergence) trading strategy is an algorithmic approach implemented in C++. It aims to identify trends in a financial instrument's price movement by analyzing the relationship between two moving averages.
-
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **x**: The maximum number of shares to hold.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
-
-### Implementation
-1. **Data Retrieval**: Historical price data for the specified symbol and time frame is obtained using Python scripts (`Data.py`).
-2. **Data Parsing**: The retrieved data is parsed using C++ functions (`parse_data.cpp`) to extract relevant information such as dates and closing prices.
-3. **Moving Average Calculation**:
-   - Two exponential moving averages (EWMtL and EWMtS) are computed based on the closing prices.
-   - EWMtL represents the long-term moving average (27-day EMA), while EWMtS represents the short-term moving average (13-day EMA).
-   - The MACD line is calculated as the difference between EWMtS and EWMtL.
-   - A signal line is generated as a 10-day EMA of the MACD line.
-4. **Trading Logic**:
-   - Buy signals are generated when the MACD line crosses above the signal line, indicating a bullish trend.
-   - Sell signals are generated when the MACD line crosses below the signal line, indicating a bearish trend.
-   - The algorithm buys shares if the MACD line is above the signal line and the current holding is below the maximum limit (`x`).
-   - It sells shares if the MACD line is below the signal line and the current holding is above the negative maximum limit (`-x`).
-5. **Output Generation**:
-   - Daily cash flow and order statistics are recorded and stored in CSV files (`daily_cashflow.csv`, `order_statistics.csv`).
-   - The final profit and loss (P&L) statement is written to `final_pnl.txt`.
-
-### Results and Insights
-- **Performance Evaluation**: Analyze the generated P&L statement (`final_pnl.txt`) to assess the strategy's profitability and overall performance.
-- **Visual Analysis**: Graphical representations of daily cash flow and order statistics can provide visual insights into the strategy's execution and profitability.
+Keeping the other parameters fixed the Cahces was instantiated with varying block sizes to observe the trendin parameters like 
+Hit Rate, Miss Penalty, Total Cycles, Cache Size.
 
 
-![ADX](./pictures/MACD.png)
+![Basic](./PLots/Block_variation/hit_rate.png)
+![Basic](./PLots/Block_variation/miss.png)
+![Basic](./PLots/Block_variation/total_cycles.png)
+![Basic](./PLots/Block_variation/cache.png)
+
+
+### Observations
+- **Hit_Rate**: The Hit Rate inreases with Block Size.
+- **Miss_Penalty**: The Miss Penalty inreases with Block Size.
+- **Total Cycles**: The Total Cycles inreases with Block Size.
+- **Cache Size**: The CAche_Size inreases with Block Size.
+
+
+From above we can conclude A Cache with a adequate block size not too large , not too small  
+will perform best given tradeoff between high hit rate and low miss penalty.
 
 
 
-# Trading Strategy: RSI (Relative Strength Index)
+# CONCLUSION
 
-### Description
-The RSI (Relative Strength Index) trading strategy is a momentum oscillator that measures the speed and change of price movements. It identifies overbought and oversold conditions in a financial instrument, helping traders make informed buy or sell decisions.
+From above observation we conclude that the Cache with best performance should be 
 
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **n**: The number of days used to calculate the RSI.
-- **x**: The maximum number of shares to hold.
-- **oversold_threshold**: The RSI threshold indicating an oversold condition.
-- **overbought_threshold**: The RSI threshold indicating an overbought condition.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
+(set assosiative,adequate Block Size (= 8 bytes), Write allocate, Write Back , LRU ).
 
-### Implementation
-1. **Data Retrieval**: Historical price data for the specified symbol and time frame is obtained using Python scripts (`Data.py`).
-2. **Data Parsing**: The retrieved data is parsed using C++ functions (`parse_data.cpp`) to extract relevant information such as dates and closing prices.
-3. **RSI Calculation**:
-   - RSI is calculated based on the average gain and average loss over the specified period (`n` days).
-   - The formula for RSI is: RSI = 100 - (100 / (1 + RS)), where RS (Relative Strength) is the average gain divided by the average loss.
-4. **Trading Logic**:
-   - Buy signals are generated when the RSI falls below the oversold threshold and the holding is below the maximum limit (`x`).
-   - Sell signals are generated when the RSI rises above the overbought threshold and the holding is above the negative maximum limit (`-x`).
-5. **Output Generation**:
-   - Daily cash flow and order statistics are recorded and stored in CSV files (`daily_cashflow.csv`, `order_statistics.csv`).
-   - The final profit and loss (P&L) statement is written to `final_pnl.txt`.
-
-### Results and Insights
-- **RSI Thresholds**: Adjusting the oversold and overbought thresholds can impact the frequency of trading signals and overall strategy performance.
-- **Confirmation Signals**: RSI signals are often used in conjunction with other technical indicators to confirm buy or sell decisions.
-- **Market Conditions**: The strategy's effectiveness may vary depending on market conditions, with different thresholds performing better in different environments.
-- **Risk Management**: Implementing risk management techniques, such as position sizing and stop-loss orders, is crucial for managing downside risk and maximizing profitability.
-
-
-![ADX](./pictures/RSI.png)
+The configuration has been chosen from the observation of the above experiments.
+All the experimemts were run on 5 differnet trace file to maintain the versetalty.
 
 
 
-# Trading Strategy: Linear Regression
-
-### Description
-The Linear Regression trading strategy employs machine learning techniques to predict price movements based on historical data. It utilizes a linear regression model to analyze past price trends and make predictions about future price changes.
-
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **x**: The maximum number of shares to hold.
-- **p**: The percentage threshold for triggering buy or sell signals based on price prediction deviations.
-- **Train Start Date**: The start date for training data.
-- **Train End Date**: The end date for training data.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
-
-### Implementation
-1. **Data Preprocessing**:
-   - The historical price data is divided into two sets: one for training the linear regression model and the other for testing the model's predictions.
-   - Additional features, such as rolling mean and exponential weighted mean, are calculated to enhance the predictive capability of the model.
-2. **Training Phase**:
-   - The linear regression model is trained using the training dataset, consisting of features extracted from historical price data.
-3. **Prediction**:
-   - The trained model is used to predict future price movements based on the features extracted from the testing dataset.
-4. **Trading Logic**:
-   - Buy or sell signals are generated based on the deviation of predicted prices from actual prices, with the threshold controlled by the parameter `p`.
-   - The maximum number of shares to hold is limited by the parameter `x`.
-5. **Performance Evaluation**:
-   - The strategy's performance is evaluated based on the profit and loss (P&L) generated during the trading period.
-6. **Output Generation**:
-   - Daily cash flow and order statistics are recorded and stored in CSV files (`daily_cashflow.csv`, `order_statistics.csv`).
-   - The final profit and loss (P&L) statement is written to `final_PnL.csv`.
-
-### Results and Insights
-- **Predictive Accuracy**: The accuracy of price predictions heavily influences strategy performance. Fine-tuning model parameters and incorporating additional features can enhance predictive accuracy.
-- **Risk Management**: Controlling the maximum number of shares held (`x`) and setting appropriate buy/sell thresholds (`p`) are critical for managing risk and maximizing profitability.
-- **Model Complexity**: Experimenting with different machine learning models and feature engineering techniques can improve the robustness of the trading strategy.
-- **Market Dynamics**: The effectiveness of the strategy may vary across different market conditions. Continuous monitoring and adaptation are necessary to ensure adaptability to changing market dynamics.
 
 
 
-![ADX](./pictures/LR.png)
-
-# Multithreading  "Best of All" Strategy Evaluation
-
-### Description
-This implementation evaluates the performance of multiple trading strategies concurrently using multithreading. The strategies being evaluated include Basic, MACD, DMA, ADX, and Linear Regression. Each strategy is executed in a separate thread, allowing for parallel computation and efficient resource utilization. After all threads have completed their execution, the strategy with the best profit and loss (PnL) is identified and its order statistics and daily cash flow are stored for further analysis.
-
-### Parameters
-- **Symbol**: The symbol or ticker of the financial instrument being traded.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
-
-### Implementation
-1. **Strategy Functions**:
-   - Separate functions (`basic`, `macd`, `dma`, `adx`, `Lr`) are defined for each trading strategy. Each function takes the necessary parameters (symbol, start date, end date) and returns a `StrategyResult` object containing order statistics and daily cash flow.
-2. **Multithreading**:
-   - The `bestOfAll` function creates five threads, each corresponding to one trading strategy. It passes the appropriate strategy function and parameters to each thread.
-   - Multithreading allows the strategies to be evaluated concurrently, improving overall performance.
-3. **Result Evaluation**:
-   - Once all threads complete execution, the function compares the profit and loss (PnL) of each strategy to determine the best-performing strategy.
-   - The order statistics and daily cash flow of the best strategy are stored in CSV files for further analysis.
-4. **Memory Management**:
-   - Memory allocated for `StrategyResult` objects is freed after processing to avoid memory leaks.
-
-### Results and Insights
-- **Parallel Processing**: Multithreading enables simultaneous evaluation of multiple trading strategies, reducing computation time and improving efficiency.
-- **Best Strategy Selection**: The strategy with the highest profit and lowest loss is identified, providing insights into which approach performs best under the given market conditions.
-- **Resource Utilization**: By leveraging multithreading, the system optimally utilizes available resources, maximizing throughput and scalability.
-- **Error Handling**: Robust error handling mechanisms are necessary to ensure proper synchronization and avoid race conditions during multithreaded execution.
 
 
-![ADX](./pictures/BEST_OF_ALL.png)
 
 
-#  Pairs Trading
 
-### Description
-This implementation evaluates the Pairs Trading strategy . Pairs Trading involves trading two correlated financial instruments simultaneously based on their relative price movements. The strategy identifies pairs of assets with historically correlated prices and exploits temporary divergences from their historical relationship.
 
-### Parameters
-- **Symbol 1**: The symbol or ticker of the first financial instrument.
-- **Symbol 2**: The symbol or ticker of the second financial instrument.
-- **n**: Parameter for calculating the moving average window size.
-- **x**: Maximum number of positions (long or short) that can be held simultaneously.
-- **Start Date**: The start date for the trading period.
-- **End Date**: The end date for the trading period.
-- **Threshold**: Threshold for determining entry or exit points based on the z-score of the price difference.
-- **Stop Loss Threshold**: Threshold for implementing a stop-loss strategy to limit losses.
 
-### Implementation
-1. **Data Preparation**:
-   - Python scripts are used to fetch historical data for both symbols within the specified date range and with the given parameters.
-   - The fetched data is parsed and stored in maps for further processing.
-2. **Trading Logic**:
-   - The Pairs Trading strategy calculates the z-score of the price difference between the two assets and compares it against a predefined threshold to decide whether to enter, exit, or hold a position.
-   - If the z-score exceeds the threshold and the maximum position limit allows, a long position is taken in the first symbol and a short position in the second symbol.
-   - If the z-score falls below the negative of the threshold and the maximum position limit allows, a short position is taken in the first symbol and a long position in the second symbol.
-3. **Stop Loss Management**:
-   - If a stop-loss threshold is provided, the strategy monitors the z-score daily and exits positions if the z-score exceeds the stop-loss threshold, potentially limiting losses.
-4. **Multithreading**:
-   - The `PAIRS` function can operate in two modes: with or without a stop-loss threshold. Both modes utilize multithreading to enhance performance.
-   - Multiple instances of the Pairs Trading strategy can be evaluated concurrently for different pairs of assets.
-5. **Result Generation**:
-   - The strategy generates daily cash flow and order statistics, which are stored in CSV files for further analysis.
-   - The final profit and loss (PnL) are calculated and written to a text file.
-
-### Results and Insights
-- **Dynamic Pair Selection**: The strategy dynamically identifies pairs of assets with historically correlated prices and trades them based on current market conditions.
-- **Risk Management**: Stop-loss functionality helps mitigate potential losses by automatically exiting positions when adverse price movements occur.
-- **Performance Evaluation**: Daily cash flow and order statistics provide insights into the strategy's performance over the evaluation period.
-- **Scalability**: Multithreading enables the concurrent evaluation of multiple pairs of assets, enhancing scalability and computational efficiency.
-- **Parameter Sensitivity**: The strategy's performance may vary based on the choice of parameters such as the moving average window size and threshold values. Sensitivity analysis can help optimize parameter selection.
 
 
