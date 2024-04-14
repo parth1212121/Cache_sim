@@ -1,5 +1,5 @@
 # COL216 LAB 3 
-# CACHE SIMULATOR
+# CACHE SIMULATOR [ PART B ]
 
 ## Departmemt of Computer Science and Engineering, IIT Delhi
 
@@ -8,11 +8,11 @@
 
 **The Cache Simulator was tested on multiple trace files, and was instantiated with differnt configuration , Results and observations from these tests are shared below**
 
-# Assosiativity  :-
+# ASSOSIATIVITY 
 
 ### Description
-Keeping the poilicies fixed (write_no_allocate, write back , LRU) the Cache was tested for 3 different combinations of cache size and set size. 
-The test was meant to compare performance of caches with differnet assosiativities (Fully assosiative, Set assosiative , DIrect Mapped)
+Keeping the poilicies fixed (write_no_allocate, write back, LRU) the Cache was tested for 3 different combinations of cache size and set size. 
+The test was meant to compare performance of caches with differnet assosiativities (Fully assosiative, Set assosiative, Direct Mapped)
 
 ![Basic](./PLots/ASSOSIATIVITY/trace1/hit.png)
 ![Basic](./PLots/ASSOSIATIVITY/trace1/miss.png)
@@ -20,10 +20,10 @@ The test was meant to compare performance of caches with differnet assosiativiti
 ![Basic](./PLots/ASSOSIATIVITY/trace1/cache.png)
 
 ### Observations
-- **Hit_Rate**: The Hit Rate increases as the assosiativity increases. 
-- **Miss_Penalty**: The Miss Penalty decreases as the asociativity increses.
+- **Hit Rate**: The Hit Rate increases as the assosiativity increases. 
+- **Miss Penalty**: The Miss Penalty decreases as the asociativity increses.
 - **Total Cycles**: The Total_Cycles decreases as the asociativity increses.
-- **Cache_Size**: THe Cache Size decreases as assosiativty increases.
+- **Cache Size**: THe Cache Size decreases as assosiativty increases.
 
 From above we can conclude ,Fully assosiative cache performs much better than set assosiative and direct mapped cache.
 But, Fully Assosiative Cache demands high amount of hardware therefore is not practically realizable for large caches.
@@ -41,8 +41,8 @@ Keeping the other parameters fixed the Cahces was instantiated with LRU and then
 
 
 ### Observations
-- **Hit_Rate**: The Hit Rate is almost equal for LRU and FIFO replacement policies. 
-- **Miss_Penalty**: The Miss Penalty is generally higher for FIFO than LRU.
+- **Hit Rate**: The Hit Rate is almost equal for LRU and FIFO replacement policies. 
+- **Miss Penalty**: The Miss Penalty is generally higher for FIFO than LRU.
 - **Total Cycles**: FIFO takes high no of cycles as compared to LRU
 
 
@@ -61,8 +61,8 @@ Keeping the other parameters fixed the Cahces was instantiated with write_throug
 
 
 ### Observations
-- **Hit_Rate**: The Hit Rate is almost equal for Write_Through and Write_Back modes. 
-- **Miss_Penalty**: The Miss Penalty is generally higher for Write_Through than Write_Back.
+- **Hit Rate**: The Hit Rate is almost equal for Write_Through and Write_Back modes. 
+- **Miss Penalty**: The Miss Penalty is generally higher for Write_Through than Write_Back.
 - **Total Cycles**: Write_through takes high no of cycles as compared to Write_Back.
 
 
@@ -81,8 +81,8 @@ Keeping the other parameters fixed the Cahces was instantiated with write_alloca
 
 
 ### Observations
-- **Hit_Rate**: The Hit Rate is greater for Write_Allocate and Write_no_allocate modes. 
-- **Miss_Penalty**: The Miss Penalty is generally higher for Write_Allocate than Write_no_allocate.
+- **Hit Rate**: The Hit Rate is greater for Write_Allocate and Write_no_allocate modes. 
+- **Miss Penalty**: The Miss Penalty is generally higher for Write_Allocate than Write_no_allocate.
 - **Total Cycles**: Write_Allocate takes less no of cycles as compared to Write_no_allocate.
 
 
@@ -103,8 +103,8 @@ Hit Rate, Miss Penalty, Total Cycles, Cache Size.
 
 
 ### Observations
-- **Hit_Rate**: The Hit Rate inreases with Block Size.
-- **Miss_Penalty**: The Miss Penalty inreases with Block Size.
+- **Hit Rate**: The Hit Rate inreases with Block Size.
+- **Miss Penalty**: The Miss Penalty inreases with Block Size.
 - **Total Cycles**: The Total Cycles inreases with Block Size.
 - **Cache Size**: The CAche_Size inreases with Block Size.
 
