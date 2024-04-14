@@ -106,10 +106,10 @@ Hit Rate, Miss Penalty, Total Cycles, Cache Size.
 - **Hit Rate**: The Hit Rate inreases with Block Size.
 - **Miss Penalty**: The Miss Penalty inreases with Block Size.
 - **Total Cycles**: The Total Cycles inreases with Block Size.
-- **Cache Size**: The CAche_Size inreases with Block Size.
+- **Cache Size**: The Cache_Size inreases with Block Size.
 
 
-From above we can conclude A Cache with a adequate block size not too large , not too small  
+From above we can conclude a Cache with a adequate block size not too large , not too small  
 will perform best given tradeoff between high hit rate and low miss penalty.
 
 
